@@ -2,6 +2,7 @@ import random
 import string
 import decimal
 import sys
+import getopt
 
 
 def random_word(length):
@@ -31,5 +32,34 @@ def random_csv(n=5, m=5, headers=False, file=None):
     f.close()
 
 
+def main():
+    try:
+        optlist, args = getopt.getopt(sys.argv[1:], 'n:m:h:o', ["nrows=", "ncols=", "headers=", "outputfile="])
+    except getopt.GetoptError as err:
+        print(err)
+        sys.exit(2)
+
+    nrows = 5
+    ncols = 5
+    headers = False
+    outputfile = None
+
+    for o, a in optlist:
+        if o in ["-n", "--nrows"]:
+            nrows = int(a)
+        elif o in ["-m", "--ncols"]:
+            ncols = int(a)
+        elif o in ["-h", "--headers"]:
+            headers = int(a)
+            if headers == 0:
+                headers = False
+            else:
+                headers = True
+        elif o in ["-o", "--outputfile"]:
+            outputfile = a
+
+    random_csv(nrows, ncols, headers, outputfile)
+
+
 if __name__ == "__main__":
-    random_csv(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
+    main()
