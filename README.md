@@ -1,7 +1,7 @@
 # generate-random-csv
 Generates a random CSV.
 
-Command line random csv generator.
+Command line random csv generator.<br>
 Usage: python generate-random-csv
 
 Possible flags:<br>
